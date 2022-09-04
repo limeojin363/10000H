@@ -1,23 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="NavBar">
+        <div className="NavTitle">1만 시간의 법칙</div>
+        <div className="NavSide">
+          <span onClick={()=>{alert()}}>Information</span>
+          <span>MyPage</span>
+        </div>
+      </div>
     </div>
   );
 }
