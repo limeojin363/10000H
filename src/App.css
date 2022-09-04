@@ -1,1 +1,29 @@
+.navBar {
+  background-color: rgb(57, 57, 57); 
+  padding: 15px;
+}
 
+.mainTitle {
+  color: white;
+  font-size: 25px;
+  padding: 5px;
+}
+
+.subTitle {
+  color: rgb(198, 198, 198);
+  font-size: 15px;
+}
+
+/* Phone */
+@media only screen and (max-width: 800px) {
+  .subTitle {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+}
+/* Laptop, Desktop */
+@media only screen and (min-width: 800px) {
+  .subTitle{
+    transition: opacity 0.3s;
+  }
+}

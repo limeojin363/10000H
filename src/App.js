@@ -4,12 +4,11 @@ function App() {
   
   return (
     <div className="App">
-      <div className="NavBar">
-        <div className="NavTitle">1만 시간의 법칙</div>
-        <div className="NavSide">
-          <span onClick={()=>{alert()}}>Information</span>
-          <span>MyPage</span>
-        </div>
+      <div className="navBar">
+        <span className="navTitle">
+          <span className="mainTitle">1만 시간의 법칙</span>
+          <span className="subTitle">The law of 10,000 hours</span>
+        </span>
       </div>
     </div>
   );
