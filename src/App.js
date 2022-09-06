@@ -6,7 +6,21 @@ function App() {
   
   return (
     <div className="App">
-      ads
+
+      <div className="SideBar">
+        <div className="user">
+          UserName : 홍길동
+        </div>
+      </div>
+
+      <div className="Content">
+        <Routes>
+          <Route>
+            
+          </Route>
+        </Routes>
+      </div>
+
     </div>
   );
 }

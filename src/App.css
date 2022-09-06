@@ -1,0 +1,61 @@
+.App {
+    min-height: 100vh;
+}
+
+.Content {
+    border: 5px solid red;
+}
+
+.SideBar {
+    background-color: rgb(252, 252, 252);
+}
+
+.SideBar>* {
+    background-color: brown;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid grey;
+}
+
+.SideBar > .user {
+    background-color: beige;
+    font-size: 15px;
+    margin:30px;
+    width: fit-content;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .SideBar {
+        display: none;
+    }
+
+    .Content {
+        margin-top:30px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+}
+
+@media only screen and (min-width: 600px) {
+    
+    .App {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+    }
+
+    .SideBar {
+        border-right: 1px solid grey;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    .Content {
+        margin-top:80px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+}
