@@ -2,7 +2,7 @@
     min-height: 100vh;
 }
 
-.Content {
+.Contents {
     border: 5px solid red;
 }
 
@@ -24,8 +24,8 @@
 }
 
 .folder {
-    border-top: 2px solid black;
-    border-left: 2px solid black;
+    border-top: 2px ridge black;
+    border-left: 2px ridge black;
     border-top-left-radius: 7px;
     padding-left: 5px;
     padding-top: 2px;
