@@ -14,12 +14,12 @@ function Folders() {
 function MakeFolder(props) {
     let object = props.object
     return (
-        <div>
-            {object.depth}{object.name}
+        <div className='folder'>
+            {object.name}
             
             {object.children.map((a,i)=>{
                 return (
-                    <MakeFolder object={a}></MakeFolder>
+                    <MakeFolder key={i} object={a}></MakeFolder>
                 )
             })}
         </div>

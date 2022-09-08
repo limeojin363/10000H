@@ -13,7 +13,7 @@ function App() {
         <div className="user">
           UserName : 홍길동
         </div>
-        <div className="folder">
+        <div className="">
           <Folders></Folders>
         </div>
       </div>

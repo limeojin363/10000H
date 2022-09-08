@@ -4,7 +4,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 let rootFolder = createSlice({
     name :  'rootFolder',
     initialState : {
-      name : "afdaasdfdfs", id : 0, depth : 0, 
+      name : "Total", id : 0, depth : 0, 
       records : [
         {id : 0, type : 'a', date : "Mon Apr 19 2021", comment : 'asdfadsf'}
       ],
