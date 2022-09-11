@@ -17,7 +17,7 @@ function Content() {
         <div>
             <div></div>
             {
-                idArray.map((a,i)=>{return <div>{a}</div>})
+                idArray.map((a,i)=>{return <div key={i}>{a}</div>})
             }
         </div>
     )

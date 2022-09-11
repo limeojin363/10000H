@@ -3,7 +3,8 @@
 }
 
 .Contents {
-    border: 5px solid red;
+    border: 5px dotted black;
+    margin: 5px;
 }
 
 .SideBar {

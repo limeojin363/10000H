@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 
+
 let rootFolder = createSlice({
     name :  'rootFolder',
     initialState : [
@@ -16,14 +17,39 @@ let rootFolder = createSlice({
     }
   ],
     reducers : {
-      addRecord(state) {
-        state.records.push(1)
+      removeChild(state, action) {
       },
-      addChild(state) {
-        state.children.push(1)
+
+      addChild(state, action) {
+        let address = action.payload.address
+        let obj = state
+        let parentObj
+        let childObj
+        
+        for (var i = 9; i < address.length; i++) {
+          if (address[i]!='-') {
+            let temp
+            if (i == 9) {
+              temp = obj.find((e)=>e.id==address[i])
+            }
+            else {
+              temp = obj.children.find((e)=>e.id==address[i])
+            }
+            obj = temp
+            if (i == address.length - 1) childObj = obj
+            else if (i == address.length - 3) parentObj = obj
+            
+          }
+        }
+        
+        let newObj = {name : action.payload.name, id : 0, depth : childObj.depth+1, records : [], children : []}
+
+        childObj.children.push(newObj)
       }
     }
 })
+
+export let { addChild } = rootFolder.actions 
 
 export default configureStore({
   reducer: { 
