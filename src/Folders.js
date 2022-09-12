@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, addRecord} from './store'
+import { addChild, addRecord, removeChild} from './store'
 
 function Folders() {
     let state = useSelector(( state )=>{ return state })
-    let start = state.rootFolder
+    let start = state.rootFolder.children
     return (
         <div className="folder">
             {
@@ -16,10 +16,6 @@ function Folders() {
     )
 }
 
-// 자기 자신 요소를 찾는 함수
-function fildMe(props) {
-
-}
 
 // 객체를 props로 받아 해당 객체와 자식 객체들을 재귀적으로 호출하는 엘리먼트
 function MakeFolder(props) {
@@ -39,12 +35,10 @@ function MakeFolder(props) {
                 <span onClick={()=>{navigate(address)}}>{object.name}</span>
                 <span>
                     <button onClick={()=>{
-                        let nameInput
-                        dispatch(addChild({name : 'ads', address : address}))
-                        
+                        dispatch(addChild({name : 'TempName', address : address}))
                     }}>+</button>
                     <button onClick={()=>{
-                        
+                        dispatch(removeChild({address : address}))
                     }}>-</button>
                 </span>
             </div>
