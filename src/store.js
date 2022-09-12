@@ -1,7 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-
-
 let rootFolder = createSlice({
     name :  'rootFolder',
     initialState : [
@@ -49,10 +47,10 @@ let rootFolder = createSlice({
     }
 })
 
-export let { addChild } = rootFolder.actions 
+export let { addChild } = rootFolder.actions
 
 export default configureStore({
   reducer: { 
     rootFolder : rootFolder.reducer
    }
-}) 
+})
