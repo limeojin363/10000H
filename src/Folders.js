@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, changeName, removeChild} from './store'
+import { addChild, changeFolderName, removeChild} from './store'
 
 function Folders() {
     let state = useSelector(( state )=>{ return state })
@@ -44,7 +44,7 @@ function MakeFolder(props) {
                     }}>❌</button>
                     <button onClick={()=>{
                         var newName = prompt("새로운 폴더명을 입력하세요")
-                        dispatch(changeName({address : address, newName : newName}))
+                        dispatch(changeFolderName({address : address, newName : newName}))
                     }}>✅</button>
                 </span>
             </div>

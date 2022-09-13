@@ -18,13 +18,14 @@ let rootFolder = createSlice({
       ]
     },
     reducers : {
+
       removeChild(state, action) {
         let address = action.payload.address
         let obj = state
         let parentObj = state
         let childObj
         
-        // 제거되는 객체의 위치 결정
+        // 제거되는 객체 결정
         for (var i = 9; i < address.length; i++) {
           if (address[i]!='-') {
             let temp
@@ -51,7 +52,7 @@ let rootFolder = createSlice({
         let parentObj = state
         let childObj
         
-        // 추가되는 객체의 위치 결정
+        // 추가되는 상위객체 결정
         for (var i = 9; i < address.length; i++) {
           if (address[i]!='-') {
             let temp
@@ -71,14 +72,14 @@ let rootFolder = createSlice({
         console.log(newObj)
         childObj.children.push(newObj)
       },
-      changeName(state,action) {
+      changeFolderName(state,action) {
         let address = action.payload.address
         let newName = action.payload.newName
         let obj = state
         let parentObj = state
         let childObj
         
-        // 이름을 변경할 객체의 위치 결정
+        // 이름을 변경할 객체 결정
         for (var i = 9; i < address.length; i++) {
           if (address[i]!='-') {
             let temp
@@ -89,11 +90,20 @@ let rootFolder = createSlice({
           }
         }
         childObj.name = newName
+      },
+      addRecord(state,action) {
+        
+      },
+      removeRecord(state,action) {
+
+      },
+      changeRecordName(state,action) {
+
       }
     }
 })
 
-export let { addChild, removeChild, changeName } = rootFolder.actions
+export let {  addChild, removeChild, changeFolderName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
 
 export default configureStore({
   reducer: { 
