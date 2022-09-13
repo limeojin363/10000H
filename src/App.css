@@ -11,7 +11,7 @@
     background-color: rgb(252, 252, 252);
 }
 
-.SideBar>* {
+.SideBar > * {
     margin: 5px;
     padding: 10px;
     border: 1px solid grey;
@@ -24,13 +24,26 @@
     width: fit-content;
 }
 
+.aboutChildren > * {
+    display: inline-flex;
+    height: 15px;    
+    align-items: center; /* 가로 - 중앙으로 */
+    justify-content: flex-start; /* 세로 - 상단으로 */
+}
+
 .folder {
     border-top: 2px ridge black;
     border-left: 2px ridge black;
     border-top-left-radius: 7px;
     padding-left: 5px;
-    padding-top: 2px;
+    padding-top: 5px;
     margin-top: 3px;
+}
+
+.folderNameBox {
+    padding:3px;
+    min-height: 20px;
+    max-height: 20px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -43,14 +56,13 @@
         margin-right: 10px;
         margin-left: 10px;
     }
-
 }
 
 @media only screen and (min-width: 600px) {
     
     .App {
         display: grid;
-        grid-template-columns: 230px 1fr;
+        grid-template-columns: 300px 1fr;
     }
 
     .SideBar {

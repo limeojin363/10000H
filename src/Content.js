@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addChild, changeName, removeChild} from './store'
 
 function Content() {
-
+    let dispatch = useDispatch();
     let state = useSelector(( state )=>{ return state })
     let start = state.rootFolder
 

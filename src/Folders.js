@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, addRecord, removeChild} from './store'
+import { addChild, changeName, removeChild} from './store'
 
 function Folders() {
     let state = useSelector(( state )=>{ return state })
@@ -32,14 +32,20 @@ function MakeFolder(props) {
     return (
         <div className='folder'>
             <div style={{display:'flex', justifyContent:'space-between'}}>
-                <span onClick={()=>{navigate(address)}}>{object.name}</span>
-                <span>
+                <span onClick={()=>{navigate(address)}}>
+                    <div className="folderNameBox">{object.name}</div>
+                </span>
+                <span className="aboutChildren">
                     <button onClick={()=>{
                         dispatch(addChild({name : 'TempName', address : address}))
-                    }}>+</button>
+                    }}>➕</button>
                     <button onClick={()=>{
                         dispatch(removeChild({address : address}))
-                    }}>-</button>
+                    }}>❌</button>
+                    <button onClick={()=>{
+                        var newName = prompt("새로운 폴더명을 입력하세요")
+                        dispatch(changeName({address : address, newName : newName}))
+                    }}>✅</button>
                 </span>
             </div>
             {object.children.map((a,i)=>{

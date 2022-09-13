@@ -70,11 +70,30 @@ let rootFolder = createSlice({
         let newObj = {name : action.payload.name, id : id, depth : childObj.depth+1, records : [], children : []}
         console.log(newObj)
         childObj.children.push(newObj)
+      },
+      changeName(state,action) {
+        let address = action.payload.address
+        let newName = action.payload.newName
+        let obj = state
+        let parentObj = state
+        let childObj
+        
+        // 이름을 변경할 객체의 위치 결정
+        for (var i = 9; i < address.length; i++) {
+          if (address[i]!='-') {
+            let temp
+            temp = obj.children.find((e)=>e.id==address[i])
+            obj = temp
+            if (i == address.length - 1) childObj = obj
+            else if (i == address.length - 3) parentObj = obj
+          }
+        }
+        childObj.name = newName
       }
     }
 })
 
-export let { addChild, removeChild } = rootFolder.actions
+export let { addChild, removeChild, changeName } = rootFolder.actions
 
 export default configureStore({
   reducer: { 
