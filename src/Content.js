@@ -8,9 +8,11 @@ function Content() {
     let start = state.rootFolder
     
     let {ids} = useParams()
+    let address = ids
+    console.log(address)
     let idArray = []
-    for (var i = 0; i < ids.length; i++) {
-        if (ids[i] != '-') idArray.push(ids[i])
+    for (var i = 0; i < address.length; i++) {
+        if (address[i] != '-') idArray.push(address[i])
     }
     console.log(idArray.length)
     let obj = start

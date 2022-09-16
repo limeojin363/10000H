@@ -1,5 +1,24 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
+function getObj(obj, address0) {
+  let childObj = obj
+  let parentObj = obj
+  let temp
+  let address = address0
+  address = address.includes('/content/') ? address.substr(9) : address
+
+
+  for (var i = 0; i < address.length; i++) {
+    if (address[i]!='-') {
+      temp = obj.children.find((e)=>e.id==address[i])
+      obj = temp
+      if (i == address.length - 1) childObj = obj
+      else if (i == address.length - 3) parentObj = obj
+    }
+  }
+  return {childObj : childObj, parentObj : parentObj}
+}
+
 let rootFolder = createSlice({
     name :  'rootFolder',
     initialState : {
@@ -18,24 +37,9 @@ let rootFolder = createSlice({
       ]
     },
     reducers : {
-
       removeChild(state, action) {
-        let address = action.payload.address
-        let obj = state
-        let parentObj = state
-        let childObj
+        let {parentObj, childObj} = getObj(state, action.payload.address)
         
-        // 제거되는 객체 결정
-        for (var i = 9; i < address.length; i++) {
-          if (address[i]!='-') {
-            let temp
-            temp = obj.children.find((e)=>e.id==address[i])
-            obj = temp
-            if (i == address.length - 1) childObj = obj
-            else if (i == address.length - 3) parentObj = obj
-          }
-        }
-        console.log(parentObj.children)
         for (var i = 0; i < parentObj.children.length; i++) {
           // seek & destroy
           if (parentObj.children[i] == childObj) {
@@ -47,22 +51,8 @@ let rootFolder = createSlice({
 
       },
       addChild(state, action) {
-        let address = action.payload.address
-        let obj = state
-        let parentObj = state
-        let childObj
-        
-        // 추가되는 상위객체 결정
-        for (var i = 9; i < address.length; i++) {
-          if (address[i]!='-') {
-            let temp
-            temp = obj.children.find((e)=>e.id==address[i])
-            obj = temp
-            if (i == address.length - 1) childObj = obj
-            else if (i == address.length - 3) parentObj = obj
-            
-          }
-        }
+        let {parentObj, childObj} = getObj(state, action.payload.address)
+
         // 추가되는 객체의 id 결정
         let id = 0;
         for (var i = 0; i < childObj.children.length; i++) {
@@ -73,31 +63,20 @@ let rootFolder = createSlice({
         childObj.children.push(newObj)
       },
       changeFolderName(state,action) {
-        let address = action.payload.address
+        let {parentObj, childObj} = getObj(state, action.payload.address)
         let newName = action.payload.newName
-        let obj = state
-        let parentObj = state
-        let childObj
-        
-        // 이름을 변경할 객체 결정
-        for (var i = 9; i < address.length; i++) {
-          if (address[i]!='-') {
-            let temp
-            temp = obj.children.find((e)=>e.id==address[i])
-            obj = temp
-            if (i == address.length - 1) childObj = obj
-            else if (i == address.length - 3) parentObj = obj
-          }
-        }
         childObj.name = newName
       },
       addRecord(state,action) {
-        
+        let {parentObj, childObj} = getObj(state, action.payload.address)
+
       },
       removeRecord(state,action) {
+        let {parentObj, childObj} = getObj(state, action.payload.address)
 
       },
       changeRecordName(state,action) {
+        let {parentObj, childObj} = getObj(state, action.payload.address)
 
       }
     }
