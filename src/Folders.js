@@ -40,6 +40,7 @@ function MakeFolder(props) {
                         dispatch(addChild({name : 'TempName', address : address}))
                     }}>➕</button>
                     <button onClick={()=>{
+                        if (window.location.href.includes(address)) navigate('/')
                         dispatch(removeChild({address : address}))
                     }}>❌</button>
                     <button onClick={()=>{

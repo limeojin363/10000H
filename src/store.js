@@ -1,23 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-
-function getObj(obj, address0) {
-  let childObj = obj
-  let parentObj = obj
-  let temp
-  let address = address0
-  address = address.includes('/content/') ? address.substr(9) : address
-
-
-  for (var i = 0; i < address.length; i++) {
-    if (address[i]!='-') {
-      temp = obj.children.find((e)=>e.id==address[i])
-      obj = temp
-      if (i == address.length - 1) childObj = obj
-      else if (i == address.length - 3) parentObj = obj
-    }
-  }
-  return {childObj : childObj, parentObj : parentObj}
-}
+import {getObj} from './getObj'
 
 let rootFolder = createSlice({
     name :  'rootFolder',
@@ -59,7 +41,6 @@ let rootFolder = createSlice({
           if (childObj.children[i].id == id) id++;
         }
         let newObj = {name : action.payload.name, id : id, depth : childObj.depth+1, records : [], children : []}
-        console.log(newObj)
         childObj.children.push(newObj)
       },
       changeFolderName(state,action) {
@@ -69,7 +50,7 @@ let rootFolder = createSlice({
       },
       addRecord(state,action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
-
+        
       },
       removeRecord(state,action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
