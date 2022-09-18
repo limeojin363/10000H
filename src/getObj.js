@@ -5,7 +5,6 @@ function getObj(obj, address0) {
     let address = address0
     address = address.includes('/content/') ? address.substr(9) : address
   
-  
     for (var i = 0; i < address.length; i++) {
       if (address[i]!='-') {
         temp = obj.children.find((e)=>e.id==address[i])

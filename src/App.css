@@ -46,6 +46,11 @@
     max-height: 20px;
 }
 
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 600px) {
     .SideBar {
         display: none;
