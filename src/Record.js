@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getObj } from "./getObj";
 import { addRecord, removeRecord, changeRecordName } from './store'
 
-function Content() {
+function Record() {
     let dispatch = useDispatch();
     let state = useSelector(( state )=>{ return state })
     let {address} = useParams()
@@ -19,7 +19,7 @@ function PrintRecord(props) {
     let address = props.address
 
     return (
-        <div style={{paddingLeft: props.depth*3 + 'px'}}>
+        <div style={{paddingLeft: props.depth*5 + 'px'}}>
             <PrintSelfRecord first={props.first} obj={obj} address={address}/>
             {
                 props.obj.children.map((a,i)=>{
@@ -50,7 +50,7 @@ function PrintSelfRecord(props) {
                         <button onClick={()=>{
                             let newComment = prompt()
                             dispatch(changeRecordName({address : address, id : a.id, newComment : newComment }))
-                        }}>✅</button>
+                        }}>🔄</button>
                         </div>
                     </div>
                     )
@@ -62,4 +62,4 @@ function PrintSelfRecord(props) {
 }
 
 
-export {Content}
+export {Record}

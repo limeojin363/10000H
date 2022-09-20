@@ -1,28 +1,37 @@
 .App {
-    min-height: 100vh;
+    min-height: 95vh;
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: rgb(229, 219, 219);
 }
 
-.Contents {
-    border: 5px dotted black;
-    margin: 5px;
+.navBar {
+    display:flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(183, 161, 161);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right : 0;
+    font-weight:300;
 }
 
-.SideBar {
-    background-color: rgb(252, 252, 252);
+.navBar>*{
+    padding:10px;
 }
 
-.SideBar > * {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid grey;
+.navBar>*:first-child{
+    padding-left:30px;
 }
 
-.SideBar > .user {
-    background-color: beige;
-    font-size: 15px;
-    margin: 30px;
-    width: fit-content;
+.navBar>*:hover{
+    cursor:pointer
 }
+
+.contents
 
 .aboutChildren > * {
     display: inline-flex;
@@ -31,19 +40,29 @@
     justify-content: flex-start; /* 세로 - 상단으로 */
 }
 
-.folder {
+.category {
     border-top: 2px ridge black;
     border-left: 2px ridge black;
     border-top-left-radius: 7px;
-    padding-left: 5px;
+    padding-left: 8px;
     padding-top: 5px;
     margin-top: 3px;
 }
 
-.folderNameBox {
+.categoryNameBox {
     padding:3px;
     min-height: 20px;
     max-height: 20px;
+}
+
+.option {
+    background-color: rgba(187, 133, 133, 0);
+}
+
+.option:hover {
+    cursor: pointer;
+    background-color: rgb(185, 185, 185);
+    transition: all 0.1s;
 }
 
 .spaceBetween {
@@ -51,36 +70,3 @@
     justify-content: space-between;
 }
 
-@media only screen and (max-width: 600px) {
-    .SideBar {
-        display: none;
-    }
-
-    .Content {
-        margin-top:30px;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    
-    .App {
-        display: grid;
-        grid-template-columns: 300px 1fr;
-    }
-
-    .SideBar {
-        border-right: 1px solid grey;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-
-    .Content {
-        margin-top:80px;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-}

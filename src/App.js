@@ -1,29 +1,26 @@
 import './App.css';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import { useSelector } from "react-redux"
-import { Folders } from "./Folders"
-import {Content} from "./Content"
+import { Category } from './Category';
+import {Record} from "./Record"
 
 function App() {
   let navigate = useNavigate();
   
   return (
     <div className="App">
-      {/* 화면 출력 : 좌측 사이드바 영역 */}
-      <div className="SideBar">
-        <div className="user">
-          UserName : 홍길동
-        </div>
-        <div className="">
-          <Folders></Folders>
-        </div>
+      <div className="navBar">
+        <span onClick={()=>{navigate('/')}}>Home</span>
+        <span onClick={()=>{navigate('intro')}}>Intro</span>
+        <span onClick={()=>{navigate('/category')}}>Category</span>
+        <span onClick={()=>{navigate('/content/0')}}>Record</span>
       </div>
-      {/* 화면 출력 : 우측 콘텐츠 영역 */}
-      <div className="Contents">
+      <div className="Contents" style={{display:'block'}}>
         <Routes>
-          <Route path='/' element={<div>메인 페이지입니다. 좌측 사이드바에서 컨텐츠를 선택하세요.</div>}/>
-          <Route path='/content/:address' element={<Content></Content>}>
-          </Route>
+          <Route path='/' element={<div>메인 페이지입니다. 상단에서 컨텐츠를 선택하세요.</div>}/>
+          <Route path='/intro' element={<div>ㅎㅇ</div>}/>
+          <Route path='/category' element={<Category/>}/>
+          <Route path='/content/:address' element={<Record/>}/>
         </Routes>
       </div>
     </div>

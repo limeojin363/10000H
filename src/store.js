@@ -7,7 +7,7 @@ let rootFolder = createSlice({
       children:
       [
         {
-          name : "Total", id : 0, depth : 0, 
+          name : "Total", id : 0, depth : 0,
           records : [
             {id : 0, comment : 'asdfadsf'}
           ],
@@ -80,7 +80,7 @@ let rootFolder = createSlice({
     }
 })
 
-export let {  addChild, removeChild, changeFolderName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
+export let { addChild, removeChild, changeFolderName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
 
 export default configureStore({
   reducer: { 
