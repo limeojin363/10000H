@@ -1,23 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, changeFolderName, removeChild} from './store'
+import { addChild, changeFolderName, removeChild} from '../store'
 
-function Category() {
+function Folders() {
     let state = useSelector(( state )=>{ return state })
     let start = state.rootFolder.children
     return (
-        <div>
+        <div className="folder">
             {
                 start.map((a,i)=>{
-                    return <ShowCategory address='/content/' key={i} object={start[i]}/>
+                    return <MakeFolder address='/content/' key={i} object={start[i]}/>
                 })
             }
         </div>
     )
 }
 
+
 // 객체를 props로 받아 해당 객체와 자식 객체들을 재귀적으로 호출하는 엘리먼트
-function ShowCategory(props) {
+function MakeFolder(props) {
     let dispatch = useDispatch();
     let navigate = useNavigate()
     let state = useSelector(( state )=>{ return state })
@@ -29,10 +30,10 @@ function ShowCategory(props) {
         address = props.address + object.id
     }
     return (
-        <div className='category'>
+        <div className='folder'>
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <span onClick={()=>{navigate(address)}}>
-                    <div className="categoryNameBox">{object.name}</div>
+                    <div className="folderNameBox">{object.name}</div>
                 </span>
                 <span className="aboutChildren">
                     <button onClick={()=>{
@@ -45,18 +46,16 @@ function ShowCategory(props) {
                     <button onClick={()=>{
                         var newName = prompt("새로운 폴더명을 입력하세요")
                         dispatch(changeFolderName({address : address, newName : newName}))
-                    }}>🔄</button>
-                    <span className="option">◾◾◾</span>
+                    }}>✅</button>
                 </span>
             </div>
             {object.children.map((a,i)=>{
                 return (
-                    <ShowCategory address={address} key={i} object={a}/>
+                    <MakeFolder address={address} key={i} object={a}/>
                 )
             })}
         </div>
     )
 }
 
-
-export {Category}
+export {Folders}

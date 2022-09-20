@@ -1,7 +1,7 @@
 import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getObj } from "./getObj";
-import { addRecord, removeRecord, changeRecordName } from './store'
+import { getObj } from "../getObj";
+import { addRecord, removeRecord, changeRecordName } from '../store'
 
 function Record() {
     let dispatch = useDispatch();
@@ -10,27 +10,27 @@ function Record() {
 
     let obj = getObj(state.rootFolder, address).childObj
     return (
-        <PrintRecord obj={obj} address={address} first={1} depth={0}/>
+        <ShowRecord obj={obj} address={address} first={1} depth={0}/>
     )
 }
 
-function PrintRecord(props) {
+function ShowRecord(props) {
     let obj = props.obj
     let address = props.address
 
     return (
         <div style={{paddingLeft: props.depth*5 + 'px'}}>
-            <PrintSelfRecord first={props.first} obj={obj} address={address}/>
+            <ShowSelfRecord first={props.first} obj={obj} address={address}/>
             {
                 props.obj.children.map((a,i)=>{
-                    return <PrintRecord key={i} obj={a} depth={props.depth+1} address={address + '-' + a.id}/>
+                    return <ShowRecord key={i} obj={a} depth={props.depth+1} address={address + '-' + a.id}/>
                 })
             }
         </div>
     )
 }
 
-function PrintSelfRecord(props) {
+function ShowSelfRecord(props) {
     let dispatch = useDispatch();
     let obj = props.obj
     let address = props.address
