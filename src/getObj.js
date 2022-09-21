@@ -3,7 +3,7 @@ function getObj(obj, address0) {
     let parentObj = obj
     let temp
     let address = address0
-    address = address.includes('/record/') ? address.substr(9) : address
+    address = address.includes('/record/') ? address.substr(8) : address
   
     for (var i = 0; i < address.length; i++) {
       if (address[i]!='-') {
@@ -13,6 +13,7 @@ function getObj(obj, address0) {
         else if (i == address.length - 3) parentObj = obj
       }
     }
+    console.log(childObj)
     return {childObj : childObj, parentObj : parentObj}
   }
   

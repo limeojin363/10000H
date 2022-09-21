@@ -7,7 +7,9 @@
 }
 
 .navBar {
-    display:flex;
+    text-align: center;
+    display:grid;
+    grid-template-columns: 50px 1fr 100px;
     align-items: center;
     width: 100%;
     height: 50px;
@@ -19,16 +21,20 @@
     font-weight:300;
 }
 
-.navBar>*{
-    padding:10px;
+.navBar .left {
+    margin-left:30px
 }
 
-.navBar>*:first-child{
-    padding-left:30px;
+.navBar .left > * {
+    margin:15px;
 }
 
-.navBar>*:hover{
-    cursor:pointer
+.navBar .left > *:hover {
+    cursor:pointer;
+}
+
+.navBar .right {
+    margin-right: 30px;
 }
 
 .contents
@@ -49,20 +55,20 @@
     margin-top: 3px;
 }
 
-.categoryNameBox {
+.nameBox {
     padding:3px;
     min-height: 20px;
     max-height: 20px;
 }
 
-.option {
+.category .option {
     background-color: rgba(187, 133, 133, 0);
 }
 
 .option:hover {
     cursor: pointer;
     background-color: rgb(185, 185, 185);
-    transition: all 0.1s;
+    transition: all 0.15s;
 }
 
 .spaceBetween {

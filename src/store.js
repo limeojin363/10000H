@@ -33,7 +33,7 @@ let rootFolder = createSlice({
       },
       addChild(state, action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
-
+        console.log(childObj.name)
         // 추가되는 객체의 id 결정
         let id = 0;
         for (var i = 0; i < childObj.children.length; i++) {
