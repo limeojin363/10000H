@@ -1,36 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, changeFolderName, removeChild} from '../store'
+import { addChild, changeCategoryName, removeChild} from '../store'
 import { useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Button } from "react-bootstrap";
 
-function BasicExample(props) {
+function CategoryOption(props) {
     let dispatch = useDispatch();
+
     let address = props.address
+    let [move, setMove] = useState(0)
 
-    return (
-      <Dropdown>
-        <Dropdown.Toggle size="sm" variant="secondary" id="dropdown-basic">
-        Option
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-            <Dropdown.Item onClick={()=>{
-                dispatch(addChild({name : 'TempName', address : address}))
-            }}>새로운 하위 카테고리</Dropdown.Item>
-            <Dropdown.Item onClick={()=>{
-                dispatch(removeChild({address : address}))
-            }}>해당 카테고리 삭제</Dropdown.Item>
-            <Dropdown.Item onClick={()=>{
-                var newName = prompt("새로운 폴더명을 입력하세요")
-                dispatch(changeFolderName({address : address, newName : newName}))
-            }}>해당 카테고리 이름 변경</Dropdown.Item>
-            <Dropdown.Item onClick={()=>{
-            }}>a</Dropdown.Item>
+    
+    return(  
+        <div>
+            {
+            move?
+            <Button size="sm" variant="secondary" onClick={()=>{
 
-        </Dropdown.Menu>
-      </Dropdown>
-    );
+            }}>여기로 이동..</Button>
+            :
+            <Dropdown>
+                <Dropdown.Toggle size="sm" variant="secondary" id="dropdown-basic">
+                Option
+                </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={()=>{
+                            dispatch(addChild({name : 'TempName', address : address}))
+                        }}>하위 카테고리 생성</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{
+                            dispatch(removeChild({address : address}))
+                        }}>삭제</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{
+                            var newName = prompt("변경할 카테고리 이름을 입력하세요")
+                            dispatch(changeCategoryName({address : address, newName : newName}))
+                        }}>이름 변경</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{
+                            setMove(1)
+                        }}>이동</Dropdown.Item>
+                    </Dropdown.Menu>
+            </Dropdown>            }
+
+        </div>
+    )
   }
   
 
@@ -40,7 +53,7 @@ function Category() {
     let start = state.rootFolder.children
     return (
         <div>
-            <div>카테고리를 클릭하면 해당 레코드로 이동합니다</div>
+            <div>클릭시 해당 카테고리의 기록으로 이동합니다</div>
             {
                 start.map((a,i)=>{
                     return <ShowCategory address='/record/' key={i} object={start[i]}/>
@@ -69,7 +82,7 @@ function ShowCategory(props) {
                     <div className="nameBox">{object.name}</div>
                 </span>
                 <span className="aboutChildren">
-                    <span className="option"><BasicExample address={address}/></span>
+                    <span className="option"><CategoryOption address={address}/></span>
                 </span>
             </div>
             {object.children.map((a,i)=>{

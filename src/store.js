@@ -42,7 +42,7 @@ let rootFolder = createSlice({
         let newObj = {name : action.payload.name, id : id, depth : childObj.depth+1, records : [], children : []}
         childObj.children.push(newObj)
       },
-      changeFolderName(state,action) {
+      changeCategoryName(state,action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
         let newName = action.payload.newName
         childObj.name = newName
@@ -80,7 +80,7 @@ let rootFolder = createSlice({
     }
 })
 
-export let { addChild, removeChild, changeFolderName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
+export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
 
 export default configureStore({
   reducer: { 
