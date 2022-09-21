@@ -19,7 +19,7 @@ function ShowRecord(props) {
     let address = props.address
 
     return (
-        <div style={{paddingLeft: props.depth*5 + 'px'}}>
+        <div style={{paddingLeft: props.depth*10 + 'px'}}>
             <ShowSelfRecord first={props.first} obj={obj} address={address}/>
             {
                 props.obj.children.map((a,i)=>{

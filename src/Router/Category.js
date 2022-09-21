@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
-import { addChild, changeCategoryName, removeChild} from '../store'
+import { addChild, changeCategoryName, removeChild, moveCategory1,moveCategory2} from '../store'
 import { useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -8,24 +8,23 @@ import { Button } from "react-bootstrap";
 
 function CategoryOption(props) {
     let dispatch = useDispatch();
-
+    let state = useSelector(( state )=>{ return state })
     let address = props.address
     let [move, setMove] = useState(0)
 
-    
-    return(  
+    return(
         <div>
             {
-            move?
+            state.rootFolder.move?
             <Button size="sm" variant="secondary" onClick={()=>{
-
+                dispatch(moveCategory2({address : address}))
             }}>여기로 이동..</Button>
             :
             <Dropdown>
                 <Dropdown.Toggle size="sm" variant="secondary" id="dropdown-basic">
                 Option
                 </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu variant="secondary">
                         <Dropdown.Item onClick={()=>{
                             dispatch(addChild({name : 'TempName', address : address}))
                         }}>하위 카테고리 생성</Dropdown.Item>
@@ -34,13 +33,14 @@ function CategoryOption(props) {
                         }}>삭제</Dropdown.Item>
                         <Dropdown.Item onClick={()=>{
                             var newName = prompt("변경할 카테고리 이름을 입력하세요")
-                            dispatch(changeCategoryName({address : address, newName : newName}))
+                            if (newName!=null && newName!='') dispatch(changeCategoryName({address : address, newName : newName}))
                         }}>이름 변경</Dropdown.Item>
                         <Dropdown.Item onClick={()=>{
-                            setMove(1)
+                            dispatch(moveCategory1({address : address}))
                         }}>이동</Dropdown.Item>
                     </Dropdown.Menu>
-            </Dropdown>            }
+            </Dropdown>
+            }
 
         </div>
     )

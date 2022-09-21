@@ -4,6 +4,8 @@ import {getObj} from './getObj'
 let rootFolder = createSlice({
     name :  'rootFolder',
     initialState : {
+      move : 0,
+      originAddress : '',
       children:
       [
         {
@@ -12,8 +14,8 @@ let rootFolder = createSlice({
             {id : 0, comment : 'asdfadsf'}
           ],
           children : [
-            {name : "afdadfadsfafdss", id : 0, depth : 1, records : [{id : 0, type : 'a', date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]},
-            {name : "afdaasfdasfdfs", id : 1, depth : 1, records : [{id : 0, type : 'a', date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]}
+            {name : "afdadfadsfafdss", id : 0,  records : [{id : 0,  date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]},
+            {name : "afdaasfdasfdfs", id : 1,  records : [{id : 0, date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]}
           ]
         }
       ]
@@ -21,11 +23,9 @@ let rootFolder = createSlice({
     reducers : {
       removeChild(state, action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
-        
         for (var i = 0; i < parentObj.children.length; i++) {
           // seek & destroy
           if (parentObj.children[i] == childObj) {
-            console.log(1)
             parentObj.children.splice(i,1)
             break
           }
@@ -33,7 +33,6 @@ let rootFolder = createSlice({
       },
       addChild(state, action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
-        console.log(childObj.name)
         // 추가되는 객체의 id 결정
         let id = 0;
         for (var i = 0; i < childObj.children.length; i++) {
@@ -76,14 +75,42 @@ let rootFolder = createSlice({
             record.comment = newComment
           }
         })
-      }
+      },
+      moveCategory1(state, action) {
+        state.move=1
+        state.originAddress = action.payload.address
+      },
+      moveCategory2(state, action) {
+        let destAddress = action.payload.address
+        if (destAddress.includes(state.originAddress)) alert("지랄노..")
+        else {
+          let newId = 0
+          let destObj = getObj(state, destAddress).childObj
+          let originObj = getObj(state, state.originAddress).childObj
+          let {parentObj, childObj} = getObj(state, state.originAddress)
+          for (var i = 0; i < parentObj.children.length; i++) {
+            // seek & destroy
+            if (parentObj.children[i] == childObj) {
+              parentObj.children.splice(i,1)
+              break
+            }
+          }
+          getObj(state,destAddress).childObj.children.map((a,i)=>{
+            if (newId == a.id) newId++
+          })
+          originObj.id=newId
+          destObj.children.push(originObj)
+          
+        }
+        state.move=0
+      },
     }
 })
 
-export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord,changeRecordName} = rootFolder.actions
+export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord,changeRecordName, moveCategory1,moveCategory2} = rootFolder.actions
 
 export default configureStore({
-  reducer: { 
+  reducer: {
     rootFolder : rootFolder.reducer
    }
 })

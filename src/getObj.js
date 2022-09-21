@@ -13,7 +13,6 @@ function getObj(obj, address0) {
         else if (i == address.length - 3) parentObj = obj
       }
     }
-    console.log(childObj)
     return {childObj : childObj, parentObj : parentObj}
   }
   
