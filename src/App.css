@@ -4,6 +4,7 @@
     padding-left: 20px;
     padding-right: 20px;
     background-color: rgb(229, 219, 219);
+    transition: all 0.1s;
 }
 
 .navBar {
@@ -19,6 +20,7 @@
     left: 0;
     right : 0;
     font-weight:300;
+    z-index: 1;
 }
 
 .navBar .left {
@@ -37,9 +39,7 @@
     margin-right: 30px;
 }
 
-.contents
-
-.aboutChildren > * {
+.contents .aboutChildren > * {
     display: inline-flex;
     height: 15px;    
     align-items: center; /* 가로 - 중앙으로 */
@@ -77,3 +77,10 @@
     justify-content: space-between;
 }
 
+.a> .btn{
+    display: inline-flex;
+    height:15px;
+    font-size:3px;
+    align-items: center;
+    justify-content: flex-start;
+}

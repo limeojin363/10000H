@@ -100,14 +100,34 @@ let rootFolder = createSlice({
           })
           originObj.id=newId
           destObj.children.push(originObj)
-          
         }
         state.move=0
+      },
+      swapUp(state,action) {
+        let {parentObj, childObj} = getObj(state, action.payload.address)
+        for (var i = 0; i < parentObj.children.length; i++) {
+          if (parentObj.children[i] == childObj) {
+            if (i == 0) {alert()}
+            else {[parentObj.children[i-1],parentObj.children[i]]=[parentObj.children[i],parentObj.children[i-1]]}
+            return
+          }
+        }
+      },
+      swapDown(state,action) {
+        let {parentObj, childObj} = getObj(state, action.payload.address)
+        for (var i = 0; i < parentObj.children.length; i++) {
+          if (parentObj.children[i] == childObj) {
+            if (i == parentObj.children.length-1) {alert()}
+            else {[parentObj.children[i+1],parentObj.children[i]]=[parentObj.children[i],parentObj.children[i+1]]}
+            return
+          }
+        }
       },
     }
 })
 
-export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord,changeRecordName, moveCategory1,moveCategory2} = rootFolder.actions
+export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord
+  ,changeRecordName, moveCategory1,moveCategory2,swapUp,swapDown} = rootFolder.actions
 
 export default configureStore({
   reducer: {
