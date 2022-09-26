@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { addChild, changeCategoryName, removeChild, moveCategory1
     ,moveCategory2,swapUp,swapDown} from '../store'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { Button } from "react-bootstrap";
@@ -32,21 +32,21 @@ function CategoryOption(props) {
                         <Dropdown.Toggle size="sm" variant="secondary" id="dropdown-basic">
                         Option
                         </Dropdown.Toggle>
-                            <Dropdown.Menu variant="secondary">
-                                <Dropdown.Item onClick={()=>{
-                                    dispatch(addChild({name : 'TempName', address : address}))
-                                }}>하위 카테고리 생성</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{
-                                    dispatch(removeChild({address : address}))
-                                }}>삭제</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{
-                                    var newName = prompt("변경할 카테고리 이름을 입력하세요")
-                                    if (newName!=null && newName!='') dispatch(changeCategoryName({address : address, newName : newName}))
-                                }}>이름 변경</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{
-                                    dispatch(moveCategory1({address : address}))
-                                }}>이동</Dropdown.Item>
-                            </Dropdown.Menu>
+                        <Dropdown.Menu variant="secondary">
+                            <Dropdown.Item onClick={()=>{
+                                dispatch(addChild({name : 'TempName', address : address}))
+                            }}>하위 카테고리 생성</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>{
+                                dispatch(removeChild({address : address}))
+                            }}>삭제</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>{
+                                var newName = prompt("변경할 카테고리 이름을 입력하세요")
+                                if (newName!=null && newName!='') dispatch(changeCategoryName({address : address, newName : newName}))
+                            }}>이름 변경</Dropdown.Item>
+                            <Dropdown.Item onClick={()=>{
+                                dispatch(moveCategory1({address : address}))
+                            }}>이동</Dropdown.Item>
+                        </Dropdown.Menu>
                     </Dropdown>       
                 </span>     
             </span>
@@ -56,8 +56,6 @@ function CategoryOption(props) {
         </div>
     )
   }
-  
-
 
 function Category() {
     let state = useSelector(( state )=>{ return state })
@@ -76,6 +74,15 @@ function Category() {
 
 // 객체를 props로 받아 해당 객체와 자식 객체들을 재귀적으로 호출하는 엘리먼트
 function ShowCategory(props) {
+    let [fadeIn, setFadeIn] = useState('fadeInStart')
+
+    useEffect(()=>{
+        let k = setTimeout(()=>{setFadeIn('fadeInEnd', 10)})
+        return ()=>{
+            clearTimeout(k)
+            setFadeIn('fadeInStart')
+        }
+    },[])
     let dispatch = useDispatch();
     let navigate = useNavigate()
     let state = useSelector(( state )=>{ return state })
@@ -87,7 +94,7 @@ function ShowCategory(props) {
         address = props.address + object.id
     }
     return (
-        <div className='category' style={{position:'relative'}}>
+        <div className={'category ' + fadeIn} >
             <div style={{display:'flex', justifyContent:'space-between'}}>
                 <span onClick={()=>{navigate(address)}}>
                     <div className="nameBox">{object.name}</div>

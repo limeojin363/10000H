@@ -1,11 +1,54 @@
+html {
+    overflow:overlay;
+}
+
+::-webkit-scrollbar {
+    opacity: 0;
+    width:18px;
+    margin:10px;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: grey;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+  
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(110, 110, 110);  
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgb(70, 70, 70);  
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 4px solid transparent;
+}
+
+
 .App {
-    min-height: 95vh;
+    min-height: 100vh;
     padding-top: 60px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 40px;
     background-color: rgb(229, 219, 219);
-    transition: all 0.1s;
+    transition: all 0.01s;
 }
+
+/* .fadeInStart {
+    opacity: 0;
+}
+
+.fadeInEnd {
+    opacity: 1;
+    transition: opacity 0.5s;
+} */
 
 .navBar {
     text-align: center;
