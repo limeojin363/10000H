@@ -9,13 +9,14 @@ let rootFolder = createSlice({
       children:
       [
         {
+          opened : false,
           name : "Total", id : 0, depth : 0,
           records : [
             {id : 0, comment : 'asdfadsf'}
           ],
           children : [
-            {name : "afdadfadsfafdss", id : 0,  records : [{id : 0,  date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]},
-            {name : "afdaasfdasfdfs", id : 1,  records : [{id : 0, date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{name : "afdadfs", id : 0, depth : 2, records : [], children : []}]}
+            {opened : 0, name : "afdadfadsfafdss", id : 0,  records : [{id : 0,  date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{opened : 0, name : "afdadfs", id : 0, depth : 2, records : [], children : []}]},
+            {opened : 0, name : "afdaasfdasfdfs", id : 1,  records : [{id : 0, date : "Mon Apr 19 2021", comment : 'asdfadsf'}], children : [{opened : 0, name : "afdadfs", id : 0, depth : 2, records : [], children : []}]}
           ]
         }
       ]
@@ -23,6 +24,10 @@ let rootFolder = createSlice({
     reducers : {
       removeChild(state, action) {
         let {parentObj, childObj} = getObj(state, action.payload.address)
+        if (childObj.name=='Total') {
+          alert("지랄노..")
+          return
+        }
         for (var i = 0; i < parentObj.children.length; i++) {
           // seek & destroy
           if (parentObj.children[i] == childObj) {
@@ -123,11 +128,15 @@ let rootFolder = createSlice({
           }
         }
       },
+      recordOpen(state,action) {
+        let {parentObj, childObj} = getObj(state, action.payload.address)
+        childObj.opened = !childObj.opened
+      }
     }
 })
 
 export let { addChild, removeChild, changeCategoryName, addRecord,removeRecord
-  ,changeRecordName, moveCategory1,moveCategory2,swapUp,swapDown} = rootFolder.actions
+  ,changeRecordName, moveCategory1,moveCategory2,swapUp,swapDown,recordOpen} = rootFolder.actions
 
 export default configureStore({
   reducer: {

@@ -50,6 +50,22 @@ html {
     transition: opacity 0.5s;
 } */
 
+.setOpened {
+    user-select: none;
+    transition: all 0.1s;
+
+}
+
+.setOpened:hover {
+    cursor:pointer;
+}
+
+.opened {
+    display: inline-block;
+    transform: rotate(90deg);
+    transition: all 0.1s;
+}
+
 .navBar {
     text-align: center;
     display:grid;

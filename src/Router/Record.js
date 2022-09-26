@@ -1,7 +1,7 @@
 import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getObj } from "../getObj";
-import { addRecord, removeRecord, changeRecordName } from '../store'
+import { addRecord, removeRecord, changeRecordName, recordOpen } from '../store'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect, useState } from "react";
 
@@ -18,6 +18,7 @@ function Record() {
 }
 
 function ShowRecord(props) {
+    let dispatch = useDispatch();
     let [fadeIn, setFadeIn] = useState('fadeInStart')
     useEffect(()=>{
         setTimeout(()=>{setFadeIn('fadeInEnd', 1)})
@@ -28,14 +29,38 @@ function ShowRecord(props) {
 
     let obj = props.obj
     let address = props.address
+    let opened = obj.opened
 
     return (
         <div className={fadeIn} style={{paddingLeft: props.depth*10 + 'px'}}>
-            <ShowSelfRecord first={props.first} obj={obj} address={address}/>
             {
-                props.obj.children.map((a,i)=>{
+                props.first==1
+                ?
+                <div className={"spaceBetween " + fadeIn} style={{fontSize :  '35px', paddingBottom : '10px', paddingTop : '10px', paddingLeft : '5px'}}><div>
+                    <span onClick={()=>{
+                        dispatch(recordOpen({address : address, id : obj.id}))
+                    }} className={'setOpened '  + (opened==1 ? 'opened':'')}>▶</span>{obj.name}</div><button style={{fontSize:'25px', width:'50px', height:'50px'}} onClick={()=>{
+                    dispatch(addRecord({address : address, id : obj.id}))
+                }}>➕</button></div>
+                :                
+                <div className={"spaceBetween " + fadeIn} style={{fontSize :  '25px', paddingBottom : '10px', paddingTop : '10px', paddingLeft : '5px'}}><div>
+                    <span onClick={()=>{
+                        dispatch(recordOpen({address : address, id : obj.id}))
+                    }} className={'setOpened '  + (opened==1 ? 'opened':'')}>▶</span>{obj.name}</div><button style={{fontSize:'20px', width:'45px', height:'40px'}} onClick={()=>{
+                    dispatch(addRecord({address : address, id : obj.id}))
+                }}>➕</button></div>
+            }
+            {
+                opened == 0
+                ?
+                <></>
+                :
+                <div><ShowSelfRecord first={props.first} obj={obj} address={address}/>
+                {props.obj.children.map((a,i)=>{
                     return <ShowRecord key={i} obj={a} depth={props.depth+1} address={address + '-' + a.id}/>
                 })
+                }
+                </div>
             }
         </div>
     )
@@ -86,17 +111,7 @@ function ShowSelfRecord(props) {
     let address = props.address
     return (
         <div className={fadeIn}>
-            {
-                props.first==1
-                ?
-                <div className={"spaceBetween " + fadeIn} style={{fontSize :  '35px', paddingBottom : '10px', paddingTop : '10px', paddingLeft : '5px'}}>{props.first == 1 ? '' : ' - '}{obj.name}<button style={{fontSize:'25px', width:'50px', height:'50px'}} onClick={()=>{
-                    dispatch(addRecord({address : address, id : obj.id}))
-                }}>➕</button></div>
-                :
-                <div className={"spaceBetween " + fadeIn} style={{fontSize :  '25px', paddingBottom : '10px', paddingTop : '10px', paddingLeft : '5px'}}>{props.first == 1 ? '' : ' - '}{obj.name}<button style={{fontSize:'25px', width:'50px', height:'50px'}} onClick={()=>{
-                    dispatch(addRecord({address : address, id : obj.id}))
-                }}>➕</button></div>
-            }
+            
             <div>
             {
                 obj.records.map((a,i)=>{
